@@ -72,3 +72,8 @@ The `fsm-event-trigger` class tells the FSM view to pay attention to this elemen
 ## Tests
 
 A test suite (not quite full coverage yet) using qunit and sinon is available in /test.
+
+## Licence
+
+In Canada, licence is a noun, and license is a verb. This software is
+licensed under the MIT licence.
