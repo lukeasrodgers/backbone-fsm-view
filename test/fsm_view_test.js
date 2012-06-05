@@ -165,9 +165,11 @@ $(document).ready(function() {
     try{
       this.view.getTransition('trigger', 'currentstate');
     }
-    catch(err) {}
-    sinon.assert.calledOnce(spy);
-    sinon.assert.threw(spy);
+    catch(err) {
+      sinon.assert.calledOnce(spy);
+      sinon.assert.threw(spy);
+      strictEqual(err.message, 'Transition is undefined: (trigger, currentstate), current state: uninitialized');
+    }
   });
 
   module('addToQueue', {
@@ -195,7 +197,7 @@ $(document).ready(function() {
     };
     this.view.addTransition('initialize', 'uninitialized', cb, 'initialized');
     this.view.process('initialize', this.el);
-    equal(this.view.currentFsmState, 'initialized');
+    strictEqual(this.view.currentFsmState, 'initialized');
   });
 
   test('calls the callback', function() {

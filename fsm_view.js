@@ -62,7 +62,7 @@ var FsmView = Backbone.View.extend({
       return this.stateTransitionsAny[[action]];
     }
     else {
-      throw new Error("Transition is undefined: (" + action + ", " + state + ")");
+      throw new Error('Transition is undefined: (' + action + ', ' + state + '), current state: ' + this.currentFsmState);
     }
   },
 
