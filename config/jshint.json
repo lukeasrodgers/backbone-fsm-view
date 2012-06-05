@@ -1,0 +1,33 @@
+{
+	"predef": [
+    "_",
+    "Backbone",
+    "sinon",
+    "FsmView",
+    "test",
+    "deepEqual",
+    "equal",
+    "strictEqual",
+    "ok",
+    "module"
+	],
+
+  "jquery": true,
+  "devel": true,
+  "browser" : true,
+  "curly": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "evil": false,
+  "forin": true,
+  "immed": true,
+  "newcap": true,
+  "noarg": true,
+  "noempty": false,
+  "onevar": false,
+  "plusplus": false,
+  "regexp": false,
+  "undef": true,
+  "sub": true,
+  "strict": false
+}
