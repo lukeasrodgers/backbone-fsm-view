@@ -98,7 +98,7 @@ $(document).ready(function() {
   test('returns a transitionAny if it is the only one', function() {
     this.view.addTransitionAny('trigger', this.cb, 'nextstate');
     deepEqual(this.view.getTransition('trigger', 'currentstate'),
-              this.view.stateTransitionsAny['trigger']);
+              this.view.stateTransitionsAny.trigger);
   });
 
   test('returns a transition if it is the only one', function() {
@@ -168,6 +168,54 @@ $(document).ready(function() {
     catch(err) {}
     sinon.assert.calledOnce(spy);
     sinon.assert.threw(spy);
+  });
+
+  module('addToQueue', {
+    setup: function() {
+      this.el = $('<input type="text" value="inputval" />').get(0);
+      this.view = new FsmView();
+    }
+  });
+
+  test('adds an FSM event, consisting of action and dom element, to the FSM queue', function() {
+    this.view.addToQueue('foobar', this.el);
+    deepEqual(this.view.queue, [['foobar', this.el]]);
+  });
+
+  module('process', {
+    setup: function() {
+      this.el = $('<input type="text" value="inputval" />').get(0);
+      this.view = new FsmView();
+    }
+  });
+
+  test('transitions into the next state', function() {
+    var cb = function() {
+      return;
+    };
+    this.view.addTransition('initialize', 'uninitialized', cb, 'initialized');
+    this.view.process('initialize', this.el);
+    equal(this.view.currentFsmState, 'initialized');
+  });
+
+  test('calls the callback', function() {
+    var callback_spy = sinon.spy();
+    this.view.addTransition('initialize', 'uninitialized', callback_spy, 'initialized');
+    this.view.process('initialize', this.el);
+    sinon.assert.calledOnce(callback_spy);
+  });
+
+  test('will call itself again until its queue is empty', function() {
+    var cb1 = function() {
+      this.addToQueue('foobar', this.el);
+    };
+    var process_spy = this.spy(this.view, 'process'),
+        callback_spy = sinon.spy();
+    this.view.addTransition('initialize', 'uninitialized', cb1, 'initialized');
+    this.view.addTransition('foobar', 'initialized', callback_spy, 'foobar2');
+    this.view.process('initialize', this.el);
+    sinon.assert.calledTwice(process_spy);
+    sinon.assert.calledOnce(callback_spy);
   });
 
 });
