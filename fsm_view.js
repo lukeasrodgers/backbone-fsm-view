@@ -49,16 +49,16 @@ var FsmView = Backbone.View.extend({
       value = $el.val();
     }
 
-    if ( this.stateTransitionsEvaluations[[action, state, value]]) {
+    if (this.stateTransitionsEvaluations[[action, state, value]]) {
       return this.stateTransitionsEvaluations[[action, state, value]];
     }
-    else if ( this.stateTransitionsEvaluationsAny[[action, value]]) {
+    else if (this.stateTransitionsEvaluationsAny[[action, value]]) {
       return this.stateTransitionsEvaluationsAny[[action, value]];
     }
-    else if ( this.stateTransitions[[action, state]]) {
+    else if (this.stateTransitions[[action, state]]) {
       return this.stateTransitions[[action, state]];
     }
-    else if ( this.stateTransitionsAny[[action]]) {
+    else if (this.stateTransitionsAny[[action]]) {
       return this.stateTransitionsAny[[action]];
     }
     else {
