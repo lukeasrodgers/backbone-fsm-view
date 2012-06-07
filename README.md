@@ -1,6 +1,12 @@
-# backbone-fsm-view
+# Backbone Finite State Machine View
 
-A finite state machine view for Backbone.js
+A finite state machine view for Backbone.js. If you have pages involving
+complex form navigation, where you want to show/hide elements, and load
+different options depending on previous choices (i.e. on the state), you
+may find this handy.
+
+The code contains JSDoc documentation and closure closure
+compiler-compatible type annotations.
 
 ## (Somewhat) basic usage
 
@@ -71,7 +77,16 @@ The `fsm-event-trigger` class tells the FSM view to pay attention to this elemen
 
 ## Tests
 
-A test suite (not quite full coverage yet) using qunit and sinon is available in /test.
+A full-coverage test suite using qunit and sinon is available in /test.
+
+Additionally, if you have closure compiler on your system, you may use
+compile\_javascript.rb in /test to run fsm\_view.js through closure
+compiler with advance optimization and type checking. It relies on
+several extern files in /externs.
+
+You can either export an environment variable CC\_PATH that points to
+compiler.jar on your system, or modify compile\_javascript.rb
+accordingly.
 
 ## Licence
 
